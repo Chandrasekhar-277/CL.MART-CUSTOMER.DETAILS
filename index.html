@@ -196,88 +196,16 @@ tr:hover {
 </div>
 
 <script>
-if(sessionStorage.getItem("adminLoggedIn") !== "true") {
-    window.location.href = "login.html";
-    
-const form = document.getElementById("customerForm");
-const table = document.getElementById("customerTable");
-
-
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const customer = {
-        id: Date.now(),
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        date: document.getElementById("date").value,
-        product: document.getElementById("product").value,
-        total: 
-            Number(document.getElementById("cost").value) *
-            Number(document.getElementById("quantity").value)
-    };
-
-    let customers = JSON.parse(localStorage.getItem("customers")) || [];
-    customers.push(customer);
-    localStorage.setItem("customers", JSON.stringify(customers));
-
-    form.reset();
-    loadCustomers();
-});
-
-function loadCustomers() {
-    table.innerHTML = "";
-    let customers = JSON.parse(localStorage.getItem("customers")) || [];
-
-    customers.forEach(c => {
-        table.innerHTML += `
-            <tr>
-                <td>${c.name}</td>
-                <td>${c.email}</td>
-                <td>${c.phone}</td>
-                <td>${c.date}</td>
-                <td>${c.product}</td>
-                <td>₹${c.total}</td>
-                <td><span class="action-btn" onclick="deleteCustomer(${c.id})">Delete</span></td>
-            </tr>
-        `;
-    });
-}
-
-function deleteCustomer(id) {
-    let customers = JSON.parse(localStorage.getItem("customers")) || [];
-    customers = customers.filter(c => c.id !== id);
-    localStorage.setItem("customers", JSON.stringify(customers));
-    loadCustomers();
-}
-</script>
-   
-<script>
-    if (sessionStorage.getItem("adminLoggedIn") !== "true") {
-        window.location.href = "login.html";
-    }
-</script>
-    <script>
-    if (sessionStorage.getItem("adminLoggedIn") !== "true") {
-        window.location.href = "login.html";
-    }
-
-    function logout() {
-        sessionStorage.removeItem("adminLoggedIn");
-        window.location.href = "login.html";
-    }
-</script>
-    <script>
     // LOGIN CHECK FIRST
     if (sessionStorage.getItem("adminLoggedIn") !== "true") {
         window.location.href = "login.html";
-    } else {
-        loadCustomers(); // load data ONLY if logged in
     }
 
     const form = document.getElementById("customerForm");
     const table = document.getElementById("customerTable");
+
+    // Load customers when page opens
+    loadCustomers();
 
     form.addEventListener("submit", function(e) {
         e.preventDefault();
@@ -289,7 +217,9 @@ function deleteCustomer(id) {
             phone: document.getElementById("phone").value,
             date: document.getElementById("date").value,
             product: document.getElementById("product").value,
-            total: document.getElementById("cost").value * document.getElementById("quantity").value
+            total:
+                Number(document.getElementById("cost").value) *
+                Number(document.getElementById("quantity").value)
         };
 
         let customers = JSON.parse(localStorage.getItem("customers")) || [];
@@ -314,7 +244,9 @@ function deleteCustomer(id) {
                     <td>${c.product}</td>
                     <td>₹${c.total}</td>
                     <td>
-                        <button class="action-btn" onclick="deleteCustomer(${c.id})">Delete</button>
+                        <span class="action-btn" onclick="deleteCustomer(${c.id})">
+                            Delete
+                        </span>
                     </td>
                 </tr>
             `;
@@ -333,6 +265,7 @@ function deleteCustomer(id) {
         window.location.href = "login.html";
     }
 </script>
+
 
 
 
