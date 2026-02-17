@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CL Mart | Customer Details</title>
+<title>CL MART | Customer Management</title>
 
 <style>
 * {
@@ -14,227 +14,182 @@
 }
 
 body {
-    background-color: #f4f6f9;
+    background-color: #eef2f7;
 }
 
-/* Header */
+/* HEADER */
 .header {
-    background-color: #1e293b;
+    background-color: #1a1f36;
     color: white;
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 20px 50px;
 }
 
-.logo {
+.company-name {
     font-size: 22px;
     font-weight: 600;
-    letter-spacing: 1px;
 }
 
-.logo span {
-    color: #38bdf8;
-}
-
-.header-right {
+.page-title {
+    margin-top: 5px;
     font-size: 14px;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
-/* Main Container */
+/* MAIN CONTAINER */
 .container {
-    max-width: 1000px;
-    margin: 40px auto;
+    width: 95%;
+    max-width: 1300px;
+    margin: 30px auto;
+}
+
+/* SECTION BOX */
+.section {
     background: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-.title {
-    font-size: 20px;
-    font-weight: 600;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     margin-bottom: 30px;
-    color: #1e293b;
-    border-left: 4px solid #38bdf8;
-    padding-left: 10px;
 }
 
-/* Form */
-<form id="customerForm">
-
-    <div class="form-group">
-        <label>Customer Name</label>
-        <input type="text" id="name" required>
-    </div>
-
-    <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="email" required>
-    </div>
-
-    <div class="form-group">
-        <label>Phone Number</label>
-        <input type="tel" id="phone" required>
-    </div>
-
-    <div class="form-group">
-        <label>Purchase Date</label>
-        <input type="date" id="date" required>
-    </div>
-
-    <div class="form-group">
-        <label>Product Name</label>
-        <input type="text" id="product" required>
-    </div>
-
-    <div class="form-group">
-        <label>Cost (₹)</label>
-        <input type="number" id="cost" required>
-    </div>
-
-    <div class="form-group">
-        <label>Quantity</label>
-        <input type="number" id="quantity" required>
-    </div>
-
-    <div class="button-group">
-        <button type="submit">Save Customer Record</button>
-    </div>
-
-</form>
-
-<!-- Table to Show Data -->
-<table id="customerTable" style="margin-top:40px; width:100%; border-collapse: collapse;">
-    <thead style="background:#1e293b; color:white;">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Date</th>
-            <th>Product</th>
-            <th>Cost</th>
-            <th>Qty</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-
-
-/* Full width button */
-.button-group {
-    grid-column: span 2;
-    margin-top: 10px;
+/* SECTION TITLE */
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-left: 4px solid #2563eb;
+    padding-left: 8px;
 }
 
+/* FORM GRID */
+form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+input {
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* BUTTON */
 button {
-    width: 100%;
-    padding: 12px;
-    background-color: #1e293b;
+    grid-column: span 4;
+    padding: 10px;
+    background-color: #1a1f36;
     color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 15px;
+    border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #0f172a;
+    background-color: #111827;
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 20px;
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1a1f36;
+    color: white;
+    padding: 12px;
     font-size: 13px;
-    color: #64748b;
-    margin-top: 40px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 13px;
+}
+
+tr:hover {
+    background-color: #f9fafb;
+}
+
+.action-btn {
+    color: red;
+    cursor: pointer;
+    font-size: 12px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
-    <div class="logo">CL <span>MART</span></div>
-    <div class="header-right">Customer Management Portal</div>
+    <div class="company-name">CL MART</div>
+    <div class="page-title">Customer Management System</div>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="container">
 
-    <div class="title">CL MART CUSTOMER DETAILS</div>
+    <!-- CUSTOMER ENTRY SECTION -->
+    <div class="section">
+        <div class="section-title">Enter Customer Details</div>
 
-    <form>
+        <form id="customerForm">
+            <input type="text" id="name" placeholder="Customer Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <input type="date" id="date" required>
+            <input type="text" id="product" placeholder="Product Name" required>
+            <input type="number" id="cost" placeholder="Cost (₹)" required>
+            <input type="number" id="quantity" placeholder="Quantity" required>
+            <button type="submit">Save Record</button>
+        </form>
+    </div>
 
-        <div class="form-group">
-            <label>Customer Name</label>
-            <input type="text" required>
-        </div>
+    <!-- CUSTOMER RECORD SECTION -->
+    <div class="section">
+        <div class="section-title">Customer Records</div>
 
-        <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" required>
-        </div>
-
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" required>
-        </div>
-
-        <div class="form-group">
-            <label>Purchase Date</label>
-            <input type="date" required>
-        </div>
-
-        <div class="form-group">
-            <label>Product Name</label>
-            <input type="text" required>
-        </div>
-
-        <div class="form-group">
-            <label>Cost (₹)</label>
-            <input type="number" required>
-        </div>
-
-        <div class="form-group">
-            <label>Quantity</label>
-            <input type="number" required>
-        </div>
-
-        <div class="button-group">
-            <button type="submit">Save Customer Record</button>
-        </div>
-
-    </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Total Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="customerTable"></tbody>
+        </table>
+    </div>
 
 </div>
 
-<div class="footer">
-    © 2026 CL Mart Pvt Ltd. All Rights Reserved.
-</div>
 <script>
 const form = document.getElementById("customerForm");
-const tableBody = document.querySelector("#customerTable tbody");
+const table = document.getElementById("customerTable");
 
-// Load saved data when page opens
 document.addEventListener("DOMContentLoaded", loadCustomers);
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
     const customer = {
+        id: Date.now(),
         name: name.value,
         email: email.value,
         phone: phone.value,
         date: date.value,
         product: product.value,
-        cost: cost.value,
-        quantity: quantity.value,
         total: cost.value * quantity.value
     };
 
@@ -247,23 +202,29 @@ form.addEventListener("submit", function(e) {
 });
 
 function loadCustomers() {
-    tableBody.innerHTML = "";
+    table.innerHTML = "";
     let customers = JSON.parse(localStorage.getItem("customers")) || [];
 
     customers.forEach(c => {
-        tableBody.innerHTML += `
+        table.innerHTML += `
             <tr>
                 <td>${c.name}</td>
                 <td>${c.email}</td>
                 <td>${c.phone}</td>
                 <td>${c.date}</td>
                 <td>${c.product}</td>
-                <td>₹${c.cost}</td>
-                <td>${c.quantity}</td>
                 <td>₹${c.total}</td>
+                <td><span class="action-btn" onclick="deleteCustomer(${c.id})">Delete</span></td>
             </tr>
         `;
     });
+}
+
+function deleteCustomer(id) {
+    let customers = JSON.parse(localStorage.getItem("customers")) || [];
+    customers = customers.filter(c => c.id !== id);
+    localStorage.setItem("customers", JSON.stringify(customers));
+    loadCustomers();
 }
 </script>
 
