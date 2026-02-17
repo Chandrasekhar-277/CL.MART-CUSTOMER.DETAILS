@@ -18,6 +18,10 @@ body {
 }
 
 /* HEADER */
+    <button onclick="logout()" style="background:red; padding:6px 12px; color:white; border:none; border-radius:4px; float:right;">
+Logout
+</button>
+
 .header {
     background-color: #1a1f36;
     color: white;
@@ -173,8 +177,18 @@ tr:hover {
     </div>
 
 </div>
+    
+if(sessionStorage.getItem("adminLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
 
 <script>
+
+    function logout() {
+    sessionStorage.removeItem("adminLoggedIn");
+    window.location.href = "login.html";
+}
+
 const form = document.getElementById("customerForm");
 const table = document.getElementById("customerTable");
 
