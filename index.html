@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CL MART | Customer Management</title>
+    
 
 <style>
 * {
@@ -18,26 +19,37 @@ body {
 }
 
 /* HEADER */
-    <button onclick="logout()" style="background:red; padding:6px 12px; color:white; border:none; border-radius:4px; float:right;">
-Logout
-</button>
-
 .header {
     background-color: #1a1f36;
     color: white;
     padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.company-name {
-    font-size: 22px;
-    font-weight: 600;
+.header-left {
+    display: flex;
+    flex-direction: column;
 }
 
-.page-title {
-    margin-top: 5px;
+.logout-btn {
+    background-color: #d63031;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 14px;
-    opacity: 0.7;
+    font-weight: 500;
+    transition: 0.3s;
 }
+
+.logout-btn:hover {
+    background-color: #b71c1c;
+}
+
+    
 
 /* MAIN CONTAINER */
 .container {
@@ -134,9 +146,14 @@ tr:hover {
 <body>
 
 <div class="header">
-    <div class="company-name">CL MART</div>
-    <div class="page-title">Customer Management System</div>
+    <div class="header-left">
+        <div class="company-name">CL MART</div>
+        <div class="page-title">Customer Management System</div>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
 </div>
+
 
 <div class="container">
 
@@ -242,6 +259,17 @@ function deleteCustomer(id) {
         window.location.href = "login.html";
     }
 </script>
+    <script>
+    if (sessionStorage.getItem("adminLoggedIn") !== "true") {
+        window.location.href = "login.html";
+    }
+
+    function logout() {
+        sessionStorage.removeItem("adminLoggedIn");
+        window.location.href = "login.html";
+    }
+</script>
+
 
 </body>
 </html>
