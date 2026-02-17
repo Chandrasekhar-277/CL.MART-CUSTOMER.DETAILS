@@ -3,104 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CL Mart Customer Details</title>
+<title>CL Mart | Customer Details</title>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f9f4;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.container {
-    width: 90%;
-    max-width: 800px;
-    margin: 40px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+body {
+    background-color: #f4f6f9;
+}
+
+/* Header */
+.header {
+    background-color: #1e293b;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    color: #2e7d32;
-    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #38bdf8;
+}
+
+.header-right {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Main Container */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .title {
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 25px;
-    color: #1b5e20;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #1e293b;
+    border-left: 4px solid #38bdf8;
+    padding-left: 10px;
 }
 
+/* Form */
 form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
-form input {
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #334155;
+}
+
+input {
     padding: 10px;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
-    border: 1px solid #ccc;
     font-size: 14px;
 }
 
-form button {
+input:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
+
+/* Full width button */
+.button-group {
     grid-column: span 2;
+    margin-top: 10px;
+}
+
+button {
+    width: 100%;
     padding: 12px;
-    background-color: #2e7d32;
+    background-color: #1e293b;
     color: white;
     border: none;
     border-radius: 6px;
+    font-size: 15px;
     cursor: pointer;
-    font-size: 16px;
+    transition: 0.3s;
 }
 
-form button:hover {
-    background-color: #1b5e20;
+button:hover {
+    background-color: #0f172a;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 40px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">CL <span>MART</span></div>
+    <div class="header-right">Customer Management Portal</div>
+</div>
+
+<!-- MAIN CONTENT -->
 <div class="container">
 
-    <!-- Logo -->
-    <div class="logo">
-        🛒 CL MART
-    </div>
+    <div class="title">CL MART CUSTOMER DETAILS</div>
 
-    <!-- Title -->
-    <div class="title">
-        CL MART CUSTOMER DETAILS
-    </div>
+    <form>
 
-    <!-- Customer Form -->
-    <form id="customerForm">
+        <div class="form-group">
+            <label>Customer Name</label>
+            <input type="text" required>
+        </div>
 
-        <input type="text" placeholder="Customer Name" required>
-        <input type="email" placeholder="Email" required>
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" required>
+        </div>
 
-        <input type="tel" placeholder="Phone Number" required>
-        <input type="date" required>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" required>
+        </div>
 
-        <input type="text" placeholder="Product Name" required>
-        <input type="number" placeholder="Cost (₹)" required>
+        <div class="form-group">
+            <label>Purchase Date</label>
+            <input type="date" required>
+        </div>
 
-        <input type="number" placeholder="Quantity" required>
+        <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" required>
+        </div>
 
-        <button type="submit">Save Details</button>
+        <div class="form-group">
+            <label>Cost (₹)</label>
+            <input type="number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" required>
+        </div>
+
+        <div class="button-group">
+            <button type="submit">Save Customer Record</button>
+        </div>
 
     </form>
 
+</div>
+
+<div class="footer">
+    © 2026 CL Mart Pvt Ltd. All Rights Reserved.
 </div>
 
 </body>
