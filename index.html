@@ -62,34 +62,66 @@ body {
 }
 
 /* Form */
-form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
+<form id="customerForm">
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
+    <div class="form-group">
+        <label>Customer Name</label>
+        <input type="text" id="name" required>
+    </div>
 
-label {
-    font-size: 14px;
-    margin-bottom: 6px;
-    color: #334155;
-}
+    <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" required>
+    </div>
 
-input {
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 14px;
-}
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" required>
+    </div>
 
-input:focus {
-    outline: none;
-    border-color: #38bdf8;
-}
+    <div class="form-group">
+        <label>Purchase Date</label>
+        <input type="date" id="date" required>
+    </div>
+
+    <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" id="product" required>
+    </div>
+
+    <div class="form-group">
+        <label>Cost (₹)</label>
+        <input type="number" id="cost" required>
+    </div>
+
+    <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" id="quantity" required>
+    </div>
+
+    <div class="button-group">
+        <button type="submit">Save Customer Record</button>
+    </div>
+
+</form>
+
+<!-- Table to Show Data -->
+<table id="customerTable" style="margin-top:40px; width:100%; border-collapse: collapse;">
+    <thead style="background:#1e293b; color:white;">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Cost</th>
+            <th>Qty</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
 
 /* Full width button */
 .button-group {
@@ -185,6 +217,55 @@ button:hover {
 <div class="footer">
     © 2026 CL Mart Pvt Ltd. All Rights Reserved.
 </div>
+<script>
+const form = document.getElementById("customerForm");
+const tableBody = document.querySelector("#customerTable tbody");
+
+// Load saved data when page opens
+document.addEventListener("DOMContentLoaded", loadCustomers);
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const customer = {
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+        date: date.value,
+        product: product.value,
+        cost: cost.value,
+        quantity: quantity.value,
+        total: cost.value * quantity.value
+    };
+
+    let customers = JSON.parse(localStorage.getItem("customers")) || [];
+    customers.push(customer);
+    localStorage.setItem("customers", JSON.stringify(customers));
+
+    form.reset();
+    loadCustomers();
+});
+
+function loadCustomers() {
+    tableBody.innerHTML = "";
+    let customers = JSON.parse(localStorage.getItem("customers")) || [];
+
+    customers.forEach(c => {
+        tableBody.innerHTML += `
+            <tr>
+                <td>${c.name}</td>
+                <td>${c.email}</td>
+                <td>${c.phone}</td>
+                <td>${c.date}</td>
+                <td>${c.product}</td>
+                <td>₹${c.cost}</td>
+                <td>${c.quantity}</td>
+                <td>₹${c.total}</td>
+            </tr>
+        `;
+    });
+}
+</script>
 
 </body>
 </html>
