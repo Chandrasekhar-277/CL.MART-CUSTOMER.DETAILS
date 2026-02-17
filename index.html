@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CL Mart Customer Details</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f9f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #1b5e20;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+form input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+form button {
+    grid-column: span 2;
+    padding: 12px;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #1b5e20;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Logo -->
+    <div class="logo">
+        🛒 CL MART
+    </div>
+
+    <!-- Title -->
+    <div class="title">
+        CL MART CUSTOMER DETAILS
+    </div>
+
+    <!-- Customer Form -->
+    <form id="customerForm">
+
+        <input type="text" placeholder="Customer Name" required>
+        <input type="email" placeholder="Email" required>
+
+        <input type="tel" placeholder="Phone Number" required>
+        <input type="date" required>
+
+        <input type="text" placeholder="Product Name" required>
+        <input type="number" placeholder="Cost (₹)" required>
+
+        <input type="number" placeholder="Quantity" required>
+
+        <button type="submit">Save Details</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
