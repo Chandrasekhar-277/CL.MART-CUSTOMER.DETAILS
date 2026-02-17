@@ -237,6 +237,11 @@ function deleteCustomer(id) {
 }
 </script>
    
+<script>
+    if (sessionStorage.getItem("adminLoggedIn") !== "true") {
+        window.location.href = "login.html";
+    }
+</script>
 
 </body>
 </html>
