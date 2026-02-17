@@ -177,18 +177,11 @@ tr:hover {
     </div>
 
 </div>
-    
-if(sessionStorage.getItem("adminLoggedIn") !== "true") {
-    window.location.href = "login.html";
-}
 
 <script>
-
-    function logout() {
-    sessionStorage.removeItem("adminLoggedIn");
+if(sessionStorage.getItem("adminLoggedIn") !== "true") {
     window.location.href = "login.html";
-}
-
+    
 const form = document.getElementById("customerForm");
 const table = document.getElementById("customerTable");
 
@@ -243,6 +236,7 @@ function deleteCustomer(id) {
     loadCustomers();
 }
 </script>
+   
 
 </body>
 </html>
