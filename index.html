@@ -196,75 +196,94 @@ tr:hover {
 </div>
 
 <script>
-    // LOGIN CHECK FIRST
-    if (sessionStorage.getItem("adminLoggedIn") !== "true") {
-        window.location.href = "login.html";
-    }
+  <script type="module">
 
-    const form = document.getElementById("customerForm");
-    const table = document.getElementById("customerTable");
+// LOGIN CHECK FIRST
+if (sessionStorage.getItem("adminLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
 
-    // Load customers when page opens
-    loadCustomers();
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
+// 🔥 YOUR REAL FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyAdQMEAJyutlxuuFF71F0uryyiVtJ4R30E",
+  authDomain: "cl-mart-cms.firebaseapp.com",
+  projectId: "cl-mart-cms",
+  storageBucket: "cl-mart-cms.firebasestorage.app",
+  messagingSenderId: "570629362643",
+  appId: "1:570629362643:web:969d32e0822fce13bb1526"
+};
 
-        const customer = {
-            id: Date.now(),
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            date: document.getElementById("date").value,
-            product: document.getElementById("product").value,
-            total:
-                Number(document.getElementById("cost").value) *
-                Number(document.getElementById("quantity").value)
-        };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-        let customers = JSON.parse(localStorage.getItem("customers")) || [];
-        customers.push(customer);
-        localStorage.setItem("customers", JSON.stringify(customers));
+const form = document.getElementById("customerForm");
+const table = document.getElementById("customerTable");
 
-        form.reset();
-        loadCustomers();
-    });
+// LOAD CUSTOMERS
+async function loadCustomers() {
+  table.innerHTML = "";
+  const querySnapshot = await getDocs(collection(db, "customers"));
 
-    function loadCustomers() {
-        table.innerHTML = "";
-        let customers = JSON.parse(localStorage.getItem("customers")) || [];
+  querySnapshot.forEach((docSnap) => {
+    const c = docSnap.data();
+    table.innerHTML += `
+      <tr>
+        <td>${c.name}</td>
+        <td>${c.email}</td>
+        <td>${c.phone}</td>
+        <td>${c.date}</td>
+        <td>${c.product}</td>
+        <td>₹${c.total}</td>
+        <td>
+          <span class="action-btn" onclick="deleteCustomer('${docSnap.id}')">
+            Delete
+          </span>
+        </td>
+      </tr>
+    `;
+  });
+}
 
-        customers.forEach(c => {
-            table.innerHTML += `
-                <tr>
-                    <td>${c.name}</td>
-                    <td>${c.email}</td>
-                    <td>${c.phone}</td>
-                    <td>${c.date}</td>
-                    <td>${c.product}</td>
-                    <td>₹${c.total}</td>
-                    <td>
-                        <span class="action-btn" onclick="deleteCustomer(${c.id})">
-                            Delete
-                        </span>
-                    </td>
-                </tr>
-            `;
-        });
-    }
+// SAVE CUSTOMER
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
 
-    function deleteCustomer(id) {
-        let customers = JSON.parse(localStorage.getItem("customers")) || [];
-        customers = customers.filter(c => c.id !== id);
-        localStorage.setItem("customers", JSON.stringify(customers));
-        loadCustomers();
-    }
+  const customer = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    date: document.getElementById("date").value,
+    product: document.getElementById("product").value,
+    total:
+      Number(document.getElementById("cost").value) *
+      Number(document.getElementById("quantity").value)
+  };
 
-    function logout() {
-        sessionStorage.removeItem("adminLoggedIn");
-        window.location.href = "login.html";
-    }
+  await addDoc(collection(db, "customers"), customer);
+
+  form.reset();
+  loadCustomers();
+});
+
+// DELETE CUSTOMER
+window.deleteCustomer = async function(id) {
+  await deleteDoc(doc(db, "customers", id));
+  loadCustomers();
+};
+
+function logout() {
+    sessionStorage.removeItem("adminLoggedIn");
+    window.location.href = "login.html";
+}
+
+loadCustomers();
+
 </script>
+
 
 
 
