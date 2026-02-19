@@ -6,7 +6,26 @@
 <title>CL MART | Customer Management</title>
     
 
-<style>
+    <style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* your existing CSS above */
+
+.total-box {
+    background: white;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+</style>
+
 * {
     margin: 0;
     padding: 0;
@@ -171,6 +190,10 @@ tr:hover {
             <input type="number" id="quantity" placeholder="Quantity" required>
             <button type="submit">Save Record</button>
         </form>
+        <div class="total-box">
+    <h3>Total Revenue: ₹<span id="grandTotal">0</span></h3>
+</div>
+
     </div>
 
     <!-- CUSTOMER RECORD SECTION -->
@@ -227,10 +250,16 @@ const table = document.getElementById("customerTable");
 // LOAD CUSTOMERS
 async function loadCustomers() {
   table.innerHTML = "";
+
   const querySnapshot = await getDocs(collection(db, "customers"));
+
+  let grandTotal = 0;
 
   querySnapshot.forEach((docSnap) => {
     const c = docSnap.data();
+
+    grandTotal += Number(c.total);
+
     table.innerHTML += `
       <tr>
         <td>${c.name}</td>
@@ -247,7 +276,10 @@ async function loadCustomers() {
       </tr>
     `;
   });
+
+  document.getElementById("grandTotal").innerText = grandTotal;
 }
+
 
 // SAVE CUSTOMER
 form.addEventListener("submit", async function(e) {
